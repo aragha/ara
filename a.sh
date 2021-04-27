@@ -68,5 +68,18 @@ EOF
     linux (optional) - bare metal support
 #secend
 #sec3
-
+#
+# /etc/fstab
+# Created by anaconda on Mon Apr 26 22:45:55 2021
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk/'.
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info.
+#
+# After editing this file, run 'systemctl daemon-reload' to update systemd
+# units generated from this file.
+#
+/dev/sda3               /                       btrfs   subvol=root     0 0
+UUID=1ce49085-eefd-4851-aba4-74fffa68e1d6 /boot                   ext4    defaults        1 2
+UUID=8ABB-8E7B          /boot/efi               vfat    umask=0077,shortname=winnt 0 2
+/dev/sda3               /home                   btrfs   subvol=home     0 0
 #secend
