@@ -83,3 +83,35 @@ UUID=1ce49085-eefd-4851-aba4-74fffa68e1d6 /boot                   ext4    defaul
 UUID=8ABB-8E7B          /boot/efi               vfat    umask=0077,shortname=winnt 0 2
 /dev/sda3               /home                   btrfs   subvol=home     0 0
 #secend
+#sec4
+
+TARGET                        SOURCE           FSTYPE          OPTIONS
+/                             /dev/sda3[/root] btrfs           rw,relatime,seclabel,space_cache,subvolid=258,subvol=/root
+├─/sys                        sysfs            sysfs           rw,nosuid,nodev,noexec,relatime,seclabel
+│ ├─/sys/kernel/security      securityfs       securityfs      rw,nosuid,nodev,noexec,relatime
+│ ├─/sys/fs/cgroup            cgroup2          cgroup2         rw,nosuid,nodev,noexec,relatime,seclabel,nsdelegate
+│ ├─/sys/fs/pstore            pstore           pstore          rw,nosuid,nodev,noexec,relatime,seclabel
+│ ├─/sys/firmware/efi/efivars efivarfs         efivarfs        rw,nosuid,nodev,noexec,relatime
+│ ├─/sys/fs/bpf               none             bpf             rw,nosuid,nodev,noexec,relatime,mode=700
+│ ├─/sys/kernel/tracing       none             tracefs         rw,relatime,seclabel
+│ ├─/sys/fs/selinux           selinuxfs        selinuxfs       rw,nosuid,noexec,relatime
+│ ├─/sys/kernel/debug         debugfs          debugfs         rw,nosuid,nodev,noexec,relatime,seclabel
+│ ├─/sys/fs/fuse/connections  fusectl          fusectl         rw,nosuid,nodev,noexec,relatime
+│ └─/sys/kernel/config        configfs         configfs        rw,nosuid,nodev,noexec,relatime
+├─/proc                       proc             proc            rw,nosuid,nodev,noexec,relatime
+│ └─/proc/sys/fs/binfmt_misc  systemd-1        autofs          rw,relatime,fd=30,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=16134
+├─/dev                        devtmpfs         devtmpfs        rw,nosuid,noexec,seclabel,size=1665832k,nr_inodes=416458,mode=755
+│ ├─/dev/shm                  tmpfs            tmpfs           rw,nosuid,nodev,seclabel
+│ ├─/dev/pts                  devpts           devpts          rw,nosuid,noexec,relatime,seclabel,gid=5,mode=620,ptmxmode=000
+│ ├─/dev/mqueue               mqueue           mqueue          rw,nosuid,nodev,noexec,relatime,seclabel
+│ └─/dev/hugepages            hugetlbfs        hugetlbfs       rw,relatime,seclabel,pagesize=2M
+├─/run                        tmpfs            tmpfs           rw,nosuid,nodev,seclabel,size=674640k,nr_inodes=819200,mode=755
+│ └─/run/user/1000            tmpfs            tmpfs           rw,nosuid,nodev,relatime,seclabel,size=337316k,nr_inodes=84329,mode=700,uid=1000,gid=1000
+│   └─/run/user/1000/gvfs     gvfsd-fuse       fuse.gvfsd-fuse rw,nosuid,nodev,relatime,user_id=1000,group_id=1000
+├─/tmp                        tmpfs            tmpfs           rw,nosuid,nodev,seclabel,size=1686600k,nr_inodes=409600
+├─/boot                       /dev/sda2        ext4            rw,relatime,seclabel
+│ └─/boot/efi                 /dev/sda1        vfat            rw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=ascii,shortname=winnt,errors=remount-ro
+├─/home                       /dev/sda3[/home] btrfs           rw,relatime,seclabel,space_cache,subvolid=256,subvol=/home
+└─/var/lib/nfs/rpc_pipefs     sunrpc           rpc_pipefs      rw,relatime
+generated using the command "#findmnt >> mounttree"
+#secend
