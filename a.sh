@@ -13,11 +13,11 @@ ls /usr/share/kbd/keymaps/**/*us*.map.gz
 # timedatectl set-ntp true
 #-----------------------------
 #extract portions of script
-START=sec1s
+START=sec1
 END="secend"
 sed -n "/^~$START~$/,/$END/p"
 #-----------------------------
-#sec1s
+#sec1
 #Create fstab file at /etc/fstab
 cat > /etc/fstab << "EOF"
 # Begin /etc/fstab
@@ -35,4 +35,38 @@ devtmpfs       /dev         devtmpfs mode=0755,nosuid    0     0
 
 # End /etc/fstab
 EOF
+#secend
+
+#sec2
+#Minimal package set to define a basic Arch Linux installation
+    bash
+    bzip2
+    coreutils
+    file
+    filesystem
+    findutils
+    gawk
+    gcc-libs
+    gettext
+    glibc
+    grep
+    gzip
+    iproute2
+    iputils
+    licenses
+    pacman
+    pciutils
+    procps-ng
+    psmisc
+    sed
+    shadow
+    systemd
+    systemd-sysvcompat
+    tar
+    util-linux
+    xz
+    linux (optional) - bare metal support
+#secend
+#sec3
+
 #secend
