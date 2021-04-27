@@ -1,13 +1,5 @@
 #Linux From Scratch - Version 10.1
 #!/bin/bash
-# Simple script to list version numbers of critical development tools
-export LC_ALL=C
-bash --version | head -n1 | cut -d" " -f2-4
-MYSH=$(readlink -f /bin/sh)
-echo "/bin/sh -> $MYSH"
-echo $MYSH | grep -q bash || echo "ERROR: /bin/sh does not point to bash"
-unset MYSH
-
 ls /usr/share/kbd/keymaps/**/*us*.map.gz
 # loadkeys de-latin1
 
@@ -19,5 +11,28 @@ ls /usr/share/kbd/keymaps/**/*us*.map.gz
 
 #update system clock
 # timedatectl set-ntp true
+#-----------------------------
+#extract portions of script
+START=sec1s
+END="secend"
+sed -n "/^~$START~$/,/$END/p"
+#-----------------------------
+#sec1s
+#Create fstab file at /etc/fstab
+cat > /etc/fstab << "EOF"
+# Begin /etc/fstab
 
+# file system  mount-point  type     options             dump  fsck
+#                                                              order
 
+/dev/<xxx>     /            <fff>    defaults            1     1
+/dev/<yyy>     swap         swap     pri=1               0     0
+proc           /proc        proc     nosuid,noexec,nodev 0     0
+sysfs          /sys         sysfs    nosuid,noexec,nodev 0     0
+devpts         /dev/pts     devpts   gid=5,mode=620      0     0
+tmpfs          /run         tmpfs    defaults            0     0
+devtmpfs       /dev         devtmpfs mode=0755,nosuid    0     0
+
+# End /etc/fstab
+EOF
+#secend
