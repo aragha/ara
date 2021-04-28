@@ -17,6 +17,9 @@ START=sec1
 END="secend"
 sed -n "/^~$START~$/,/$END/p"
 #-----------------------------
+#extract lines 24 to 82 from a file, and quit at line 83
+sed -n '24,82p;83q' filename > newfile
+#-----------------------------
 #sec1
 #Create fstab file at /etc/fstab
 cat > /etc/fstab << "EOF"
@@ -114,4 +117,22 @@ TARGET                        SOURCE           FSTYPE          OPTIONS
 ├─/home                       /dev/sda3[/home] btrfs           rw,relatime,seclabel,space_cache,subvolid=256,subvol=/home
 └─/var/lib/nfs/rpc_pipefs     sunrpc           rpc_pipefs      rw,relatime
 generated using the command "#findmnt >> mounttree"
+#secend
+#sec5
+#Fedora from scratch
+sudo mkdir /mnt/local
+sudo mount /dev/sda3 /mnt/local
+sudo mkdir /mnt/local/boot
+sudo mount /dev/sda1 /mnt/local/boot
+sudo dnf --releasever=33 --installroot=/mnt/local groupinstall core
+sudo cp /etc/resolv.conf /mnt/local/etc/
+sudo mount -t sysfs none /mnt/local/sys
+sudo mount -t proc none /mnt/local/proc
+sudo mount -t efivarfs none /mnt/local/sys/firmware/efi/efivars
+sudo mount -o bind /dev /mnt/local/dev
+sudo chroot /mnt/local /bin/bash
+
+#set up networking in the chrooted session
+sudo cp /etc/resolv.conf /mnt/local/etc/resolv.conf
+
 #secend
