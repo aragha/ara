@@ -48,6 +48,10 @@ p
  
 w" | fdisk /dev/sda
 
+#partition them
+mkfs.vfat -F 32 /dev/sda1
+mkswap          /dev/sda2
+mkfs.ext4       /dev/sda3
 /dev/<xxx>     /            <fff>    defaults            1     1
 /dev/<yyy>     swap         swap     pri=1               0     0
 proc           /proc        proc     nosuid,noexec,nodev 0     0
