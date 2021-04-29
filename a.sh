@@ -2,13 +2,10 @@
 #!/bin/bash
 ls /usr/share/kbd/keymaps/**/*us*.map.gz
 # loadkeys de-latin1
-
 #Verify the boot mode
 # ls /sys/firmware/efi/efivars
-
 #Ensure your network interface is listed and enabled, for example with ip-link(8): 
 # ip link
-
 #update system clock
 # timedatectl set-ntp true
 #-----------------------------
@@ -24,10 +21,8 @@ sed -n '24,82p;83q' filename > newfile
 #Create fstab file at /etc/fstab
 cat > /etc/fstab << "EOF"
 # Begin /etc/fstab
-
 # file system  mount-point  type     options             dump  fsck
 #                                                              order
-
 /dev/<xxx>     /            <fff>    defaults            1     1
 /dev/<yyy>     swap         swap     pri=1               0     0
 proc           /proc        proc     nosuid,noexec,nodev 0     0
@@ -35,11 +30,9 @@ sysfs          /sys         sysfs    nosuid,noexec,nodev 0     0
 devpts         /dev/pts     devpts   gid=5,mode=620      0     0
 tmpfs          /run         tmpfs    defaults            0     0
 devtmpfs       /dev         devtmpfs mode=0755,nosuid    0     0
-
 # End /etc/fstab
 EOF
 #secend
-
 #sec2
 #Minimal package set to define a basic Arch Linux installation
     bash
@@ -87,7 +80,6 @@ UUID=8ABB-8E7B          /boot/efi               vfat    umask=0077,shortname=win
 /dev/sda3               /home                   btrfs   subvol=home     0 0
 #secend
 #sec4
-
 TARGET                        SOURCE           FSTYPE          OPTIONS
 /                             /dev/sda3[/root] btrfs           rw,relatime,seclabel,space_cache,subvolid=258,subvol=/root
 ├─/sys                        sysfs            sysfs           rw,nosuid,nodev,noexec,relatime,seclabel
@@ -131,10 +123,8 @@ sudo mount -t proc none /mnt/local/proc
 sudo mount -t efivarfs none /mnt/local/sys/firmware/efi/efivars
 sudo mount -o bind /dev /mnt/local/dev
 sudo chroot /mnt/local /bin/bash
-
 #set up networking in the chrooted session
 sudo cp /etc/resolv.conf /mnt/local/etc/resolv.conf
-
 #secend
 sudo dd if=/dev/sda of=mbr.bin bs=512 count=1
 sudo od -xa mbr.bin
