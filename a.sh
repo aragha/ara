@@ -23,6 +23,14 @@ cat > /etc/fstab << "EOF"
 # Begin /etc/fstab
 # file system  mount-point  type     options             dump  fsck
 #                                                              order
+#delete partitions
+echo "d
+1
+d
+2
+d
+wq" | fdisk /dev/sda
+
 #create my partitions
 echo "n
 p
