@@ -23,6 +23,23 @@ cat > /etc/fstab << "EOF"
 # Begin /etc/fstab
 # file system  mount-point  type     options             dump  fsck
 #                                                              order
+#create my partitions
+echo "n
+p
+1
++550M
+n
+p
+2
+ 
++4G
+n
+p
+3
+ 
+ 
+w" | fdisk /dev/sda
+
 /dev/<xxx>     /            <fff>    defaults            1     1
 /dev/<yyy>     swap         swap     pri=1               0     0
 proc           /proc        proc     nosuid,noexec,nodev 0     0
