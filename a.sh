@@ -165,3 +165,5 @@ sudo dd if=/dev/sda of=mbr.bin bs=512 count=1
 sudo od -xa mbr.bin
 sudo dnf --releasever=33 --installroot=/mnt --assumeyes groupinstall core
 sudo dnf --releasever=33 --installroot=/mnt --assumeyes install kernel
+sudo dnf --releasever=33 --installroot=/mnt --assumeyes install grub2 efibootmgr shim grub2-efi grub2-efi-modules 
+efibootmgr --create --disk /dev/sda  --loader /EFI/fedora/grubx64.efi --label "Fedora Grub"
