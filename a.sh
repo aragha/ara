@@ -147,19 +147,20 @@ generated using the command "#findmnt >> mounttree"
 #secend
 #sec5
 #Fedora from scratch
-sudo mkdir /mnt/local
-sudo mount /dev/sda3 /mnt/local
-sudo mkdir /mnt/local/boot
-sudo mount /dev/sda1 /mnt/local/boot
+sudo mkdir /mnt
+sudo mount /dev/sda3 /mnt
+sudo mkdir /mnt/boot
+sudo mkdir /mnt/boot/efi
+sudo mount /dev/sda1 /mnt/boot/efi
 sudo dnf --releasever=33 --installroot=/mnt/local groupinstall core
-sudo cp /etc/resolv.conf /mnt/local/etc/
-sudo mount -t sysfs none /mnt/local/sys
-sudo mount -t proc none /mnt/local/proc
-sudo mount -t efivarfs none /mnt/local/sys/firmware/efi/efivars
-sudo mount -o bind /dev /mnt/local/dev
+sudo cp /etc/resolv.conf /mnt/etc/
+sudo mount -t sysfs none /mnt/sys
+sudo mount -t proc none /mnt/proc
+sudo mount -t efivarfs none /mnt/sys/firmware/efi/efivars
+sudo mount -o bind /dev /mnt/dev
 sudo chroot /mnt/local /bin/bash
 #set up networking in the chrooted session
-sudo cp /etc/resolv.conf /mnt/local/etc/resolv.conf
+sudo cp /etc/resolv.conf /mnt/etc/resolv.conf
 #secend
 sudo dd if=/dev/sda of=mbr.bin bs=512 count=1
 sudo od -xa mbr.bin
