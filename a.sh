@@ -163,3 +163,5 @@ sudo cp /etc/resolv.conf /mnt/local/etc/resolv.conf
 #secend
 sudo dd if=/dev/sda of=mbr.bin bs=512 count=1
 sudo od -xa mbr.bin
+sudo dnf --releasever=33 --installroot=/mnt --assumeyes groupinstall core
+sudo dnf --releasever=33 --installroot=/mnt --assumeyes install kernel
