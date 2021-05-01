@@ -47,16 +47,15 @@ p
  
 w" | fdisk /dev/sda
 #partition them
-sudo mkfs.vfat -F 32 /dev/sda1
-sudo mkswap          /dev/sda2
-sudo mkfs.ext4       /dev/sda3
+sudo mkfs.vfat -F 32 /dev/sda1    #formatitefi
+sudo mkswap          /dev/sda2    #formatitefi
+sudo mkfs.ext4       /dev/sda3    #formatitefi
 #mount them
-sudo mount  /dev/sda3 /mnt
-sudo swapon /dev/sda2
-sudo mkdir /mnt/boot
-sudo mkdir /mnt/boot/efi
-sudo mkdir /mnt/boot/efi
-sudo mount /dev/sda1 /mnt/boot/efi
+sudo mount  /dev/sda3 /mnt         #mountitefi
+sudo swapon /dev/sda2              #mountitefi
+sudo mkdir /mnt/boot               #mountitefi
+sudo mkdir /mnt/boot/efi           #mountitefi
+sudo mount /dev/sda1 /mnt/boot/efi #mountitefi
 
 #Mount critical virtual filesystems:
  for i in /dev /dev/pts /proc /sys /run; do sudo mount -B $i /mnt$i; done
