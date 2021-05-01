@@ -107,3 +107,6 @@ devpts         /dev/pts     devpts   gid=5,mode=620      0     0	#fstabit
 tmpfs          /run         tmpfs    defaults            0     0	#fstabit
 devtmpfs       /dev         devtmpfs mode=0755,nosuid    0     0	#fstabit
 sudo find /mnt -print |  grep -i vmlin #findit
+
+dd if=/dev/rdsk/device-name of=/dev/rdsk/device-name bs=blocksize #cloneit
+fsck /dev/rdsk/device-name
