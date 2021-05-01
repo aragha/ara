@@ -47,9 +47,9 @@ p
  
 w" | fdisk /dev/sda
 #partition them
-mkfs.vfat -F 32 /dev/sda1
-mkswap          /dev/sda2
-mkfs.ext4       /dev/sda3
+sudo mkfs.vfat -F 32 /dev/sda1
+sudo mkswap          /dev/sda2
+sudo mkfs.ext4       /dev/sda3
 #mount them
 sudo mount  /dev/sda3 /mnt
 sudo swapon /dev/sda2
