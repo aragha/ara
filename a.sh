@@ -17,11 +17,7 @@ sed -n "/^~$START~$/,/$END/p"
 sed -n '24,82p;83q' filename > newfile
 #-----------------------------
 #sec1
-#Create fstab file at /etc/fstab
-cat > /etc/fstab << "EOF"
-# Begin /etc/fstab
-# file system  mount-point  type     options             dump  fsck
-#                                                              order
+
 #delete partitions
 echo "d
 1
@@ -62,7 +58,6 @@ sudo mount /dev/sda1 /mnt/boot/efi #mountitefi
 sudo mount -t sysfs none /mnt/sys
 sudo mount -t efivarfs none /mnt/sys/firmware/efi/efivars
 
-lsblk
 /dev/<xxx>     /            <fff>    defaults            1     1
 /dev/<yyy>     swap         swap     pri=1               0     0
 proc           /proc        proc     nosuid,noexec,nodev 0     0
@@ -70,12 +65,7 @@ sysfs          /sys         sysfs    nosuid,noexec,nodev 0     0
 devpts         /dev/pts     devpts   gid=5,mode=620      0     0
 tmpfs          /run         tmpfs    defaults            0     0
 devtmpfs       /dev         devtmpfs mode=0755,nosuid    0     0
-# End /etc/fstab
-EOF
-#secend
-#sec3
-#
-# /etc/fstab
+#/etc/fstab
 # Created by anaconda on Mon Apr 26 22:45:55 2021
 #
 # Accessible filesystems, by reference, are maintained under '/dev/disk/'.
@@ -94,8 +84,7 @@ UUID=8ABB-8E7B          /boot/efi               vfat    umask=0077,shortname=win
 #secend
 #sec5
 #Fedora from scratch
-sudo dnf --releasever=33 --installroot=/mnt/local groupinstall core
-sudo cp /etc/resolv.conf /mnt/etc/
+sudo dnf --releasever=33 --installroot=/mnt groupinstall core
 sudo mount -t sysfs none /mnt/sys
 sudo mount -t proc none /mnt/proc
 sudo mount -t efivarfs none /mnt/sys/firmware/efi/efivars
@@ -104,7 +93,17 @@ sudo chroot /mnt/local /bin/bash
 #secend
 sudo dd if=/dev/sda of=mbr.bin bs=512 count=1
 sudo od -xa mbr.bin
-sudo dnf --releasever=33 --installroot=/mnt --assumeyes groupinstall core
-sudo dnf --releasever=33 --installroot=/mnt --assumeyes install kernel
-sudo cp /etc/resolv.conf /mnt/etc #network
+sudo dnf --releasever=33 --installroot=/mnt --assumeyes groupinstall core #installit
+sudo dnf --releasever=33 --installroot=/mnt --assumeyes install kernel #installit
+sudo cp /etc/resolv.conf /mnt/etc #network #networkit
 
+/dev/sda1      /boot/efi    vfat     umask=0077,shortname=winnt 0  2	#fstabit
+/dev/sda2      swap         swap     pri=1               0     0	#fstabit
+/dev/sda3      /home        ext4     subvol=home         0     0	#fstabit
+/dev/sda3      /            ext4     subvol=root         0     0	#fstabit
+proc           /proc        proc     nosuid,noexec,nodev 0     0	#fstabit
+sysfs          /sys         sysfs    nosuid,noexec,nodev 0     0	#fstabit
+devpts         /dev/pts     devpts   gid=5,mode=620      0     0	#fstabit
+tmpfs          /run         tmpfs    defaults            0     0	#fstabit
+devtmpfs       /dev         devtmpfs mode=0755,nosuid    0     0	#fstabit
+sudo find /mnt -print |  grep -i vmlin #findit
