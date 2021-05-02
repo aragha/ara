@@ -139,3 +139,6 @@ sudo dnf --releasever=33 --installroot=/mnt --assumeyes install grub2 efibootmgr
 sudo dnf --assumeyes reinstall grub2-efi grub2-pc grub2-pc-modules grub2-tools-efi grub2-tools-extra shim grub2-efi-x64-modules #grubit
 efibootmgr --create --disk /dev/sda  --loader /EFI/fedora/grubx64.efi --label "Fedora Grub" #grubit
 sudo grub2-install --efi-directory=/mnt/boot/efi --target=x86_64-efi /dev/sda1 #grubit
+#print mbr record				#mbrrecordprintit
+sudo dd if=/dev/sda of=mbr.bin bs=512 count=1	#mbrrecordprintit
+sudo od -xa mbr.bin				#mbrrecordprintit
