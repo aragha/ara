@@ -54,15 +54,19 @@ sudo swapon /dev/sda2              #mountitefi
 sudo mount  /dev/sda3 /mnt         #mountitefi
 
 #Mount critical virtual filesystems:
-for i in /dev/pts /sys /run; do sudo mount -B $i /mnt$i; done #mountitchroot
+for i in /dev/pts /run; do sudo mount -B $i /mnt$i; done #mountitchroot
 sudo mount -t sysfs sysfs /mnt/sys #mountitchroot
 sudo mount -t efivarfs efivarfs /mnt/sys/firmware/efi/efivars #mountitchroot
-#sudo mount -t efivarfs efivarfs /sys/firmware/efi/efivars #mountitchroot
-sudo mount -t proc proc /proc #mountitchroot
+#sudo mount -t efivarfs efivarfs /sys/firmware/efi/efivars #mountitchroot - after chroot and before grub
+mount -t proc /proc proc/  #mountitchroot
+mount --rbind /sys sys/ #mountitchroot
+mount --rbind /dev dev/ #mountitchroot
 #refresh mounts #mountitchroot
 systemctl daemon-reload #mountitchroot
 sudo mount -t proc proc /proc #mountitchroot - after chroot and before grub
 sudo mount -t devfs devfs /dev #mountitchroot - after chroot adn before grub
+
+
 
 /dev/<xxx>     /            <fff>    defaults            1     1
 /dev/<yyy>     swap         swap     pri=1               0     0
