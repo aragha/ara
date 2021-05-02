@@ -116,6 +116,6 @@ sudo cp /etc/resolv.conf /mnt/etc	#configit
 sudo cp /etc/localtime /mnt/etc		#configit
 sudo cp /etc/locale.conf /mnt/etc	#configit
 sudo cp /etc/vconsole.conf /mnt/etc	#configit
-sudo echo "fedhost" > hostname		#configit
-sudo cp hostname /etc/			#configit
+sudo echo "fedhost" > ./hostname	#configit
+sudo cp hostname /mnt/etc		#configit
 #sudo rm hostname			#configit
