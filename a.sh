@@ -122,3 +122,13 @@ sudo cp /etc/vconsole.conf /mnt/etc	#configit
 sudo echo "fedhost" > ./hostname	#configit
 sudo cp hostname /mnt/etc		#configit
 #sudo rm hostname			#configit
+
+mkdir grubfolder #grubit
+cd grubfolder #grubit
+wget https://www.gnu.org/software/grub/manual/grub/grub.txt #grubit
+#wget https://ftp.gnu.org/gnu/grub/grub-2.04.tar.gz #grubit
+#tar -xvf grub-2.04.tar.gz #grubit
+sudo dnf --releasever=33 --installroot=/mnt --assumeyes install grub2 efibootmgr shim grub2-efi grub2-efi-modules grub2-tools-extra grub2-tools-efi grub2-pc-modules grub2-pc #grubit
+sudo dnf reinstall grub2-efi grub2-pc grub2-pc-modules grub2-tools-efi grub2-tools-extra shim #grubit
+efibootmgr --create --disk /dev/sda  --loader /EFI/fedora/grubx64.efi --label "Fedora Grub" #grubit
+sudo grub2-install --efi-directory=/mnt/boot/efi --target=x86_64-efi /dev/sda1 #grubit
