@@ -61,6 +61,8 @@ sudo mount -t efivarfs efivarfs /mnt/sys/firmware/efi/efivars #mountitchroot
 sudo mount -t proc proc /proc #mountitchroot
 #refresh mounts #mountitchroot
 systemctl daemon-reload #mountitchroot
+sudo mount -t proc proc /proc #mountitchroot - after chroot and before grub
+sudo mount -t devfs devfs /dev #mountitchroot - after chroot adn before grub
 
 /dev/<xxx>     /            <fff>    defaults            1     1
 /dev/<yyy>     swap         swap     pri=1               0     0
