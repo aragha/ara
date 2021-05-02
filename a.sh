@@ -56,7 +56,8 @@ sudo mount  /dev/sda3 /mnt         #mountitefi
 #Mount critical virtual filesystems:
 for i in /dev/pts /sys /run; do sudo mount -B $i /mnt$i; done #mountitchroot
 sudo mount -t sysfs sysfs /mnt/sys #mountitchroot
-sudo mount -t efivarfs none /mnt/sys/firmware/efi/efivars #mountitchroot
+sudo mount -t efivarfs efivarfs /mnt/sys/firmware/efi/efivars #mountitchroot
+#sudo mount -t efivarfs efivarfs /sys/firmware/efi/efivars #mountitchroot
 sudo mount -t proc proc /proc #mountitchroot
 #refresh mounts #mountitchroot
 systemctl daemon-reload #mountitchroot
