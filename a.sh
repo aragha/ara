@@ -112,10 +112,10 @@ root #efibootmgr --create --disk /dev/sda --part 2 --label "Gentoo" --loader "\e
 root #efibootmgr -c -d /dev/sda -p 2 -L "Gentoo" -l "\efi\boot\bootx64.efi" initrd='\initramfs-genkernel-amd64-4.9.16-gentoo' #efibootmgrit
 sudo dnf  --installroot=/mnt --assumeyes install man-db man-pages texinfo vim bash wget git sudo dosfstools efibootmgr libisoburn os-prober mtools coreutils e2fsprogs util-linux sysstat lvm2 iputils connman NetworkManager systemd procps #installit
 
-sudo cp /etc/resolv.conf /mnt/etc
-sudo cp /etc/localtime /mnt/etc
-sudo cp /etc/locale.conf /mnt/etc
-sudo cp /etc/vconsole.conf /mnt/etc
-sudo echo "fedhost" > hostname
-sudo cp hostname /etc/
-#sudo rm hostname
+sudo cp /etc/resolv.conf /mnt/etc	#configit
+sudo cp /etc/localtime /mnt/etc		#configit
+sudo cp /etc/locale.conf /mnt/etc	#configit
+sudo cp /etc/vconsole.conf /mnt/etc	#configit
+sudo echo "fedhost" > hostname		#configit
+sudo cp hostname /etc/			#configit
+#sudo rm hostname			#configit
