@@ -12,7 +12,7 @@ bison --version | head -n1
 if [ -h /usr/bin/yacc ]; then
 echo "/usr/bin/yacc -> `readlink -f /usr/bin/yacc`";
 elif [ -x /usr/bin/yacc ]; then
-echo yacc is `/usr/bin/yacc --version | head -n1`
+echo yacc is `/usr/bin/yacc -V | head -n1`
 else
 echo "yacc not found"
 fi
@@ -48,4 +48,16 @@ if [ -x dummy ]
 then echo "g++ compilation OK";
 else echo "g++ compilation failed"; fi
 rm -f dummy.c dummy
-pacman -Syu bison gcc make python texinfo patch
+sudo dnf install --assumeyes  bison gcc gcc-c++ make python texinfo patch byacc
+#pacman -Syu bison gcc make python texinfo patch
+#install g++ for Fedora Linux
+sudo dnf update
+
+#this is discoverable by doing 
+#sudo dnf install /usr/bin/g++
+
+# or
+#dnf whatprovides '*/g++'
+
+#for yacc
+#sudo dnf install byacc
