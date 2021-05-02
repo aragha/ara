@@ -107,4 +107,7 @@ sudo find /mnt -print |  grep -i vmlin #findit
 sudo find /mnt -print |  grep -i initramf #findit
 sudo find /mnt -print |  grep -i efibootm #findit
 dd if=/dev/rdsk/device-name of=/dev/rdsk/device-name bs=blocksize status=progress #cloneit
-fsck /dev/rdsk/device-name
+fsck /dev/rdsk/device-name #cloneit
+
+root #efibootmgr --create --disk /dev/sda --part 2 --label "Gentoo" --loader "\efi\boot\bootx64.efi" #efibootmgrit
+root #efibootmgr -c -d /dev/sda -p 2 -L "Gentoo" -l "\efi\boot\bootx64.efi" initrd='\initramfs-genkernel-amd64-4.9.16-gentoo' #efibootmgrit
