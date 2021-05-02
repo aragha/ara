@@ -54,9 +54,9 @@ sudo mkdir /mnt/boot/efi           #mountitefi
 sudo mount /dev/sda1 /mnt/boot/efi #mountitefi
 
 #Mount critical virtual filesystems:
- for i in /dev /dev/pts /proc /sys /run; do sudo mount -B $i /mnt$i; done
-sudo mount -t sysfs none /mnt/sys
-sudo mount -t efivarfs none /mnt/sys/firmware/efi/efivars
+for i in /dev/pts /proc /sys /run; do sudo mount -B $i /mnt$i; done #mountitchroot
+sudo mount -t sysfs none /mnt/sys #mountitchroot
+sudo mount -t efivarfs none /mnt/sys/firmware/efi/efivars #mountitchroot
 
 /dev/<xxx>     /            <fff>    defaults            1     1
 /dev/<yyy>     swap         swap     pri=1               0     0
@@ -85,11 +85,8 @@ UUID=8ABB-8E7B          /boot/efi               vfat    umask=0077,shortname=win
 #sec5
 #Fedora from scratch
 sudo dnf --releasever=33 --installroot=/mnt groupinstall core
-sudo mount -t sysfs none /mnt/sys
-sudo mount -t proc none /mnt/proc
-sudo mount -t efivarfs none /mnt/sys/firmware/efi/efivars
-sudo mount -o bind /dev /mnt/dev
-sudo chroot /mnt/local /bin/bash
+sudo mount -o bind /dev /mnt/dev #mountitchroot
+sudo chroot /mnt /bin/bash #mountitchroot
 #secend
 sudo dd if=/dev/sda of=mbr.bin bs=512 count=1
 sudo od -xa mbr.bin
@@ -107,6 +104,7 @@ devpts         /dev/pts     devpts   gid=5,mode=620      0     0	#fstabit
 tmpfs          /run         tmpfs    defaults            0     0	#fstabit
 devtmpfs       /dev         devtmpfs mode=0755,nosuid    0     0	#fstabit
 sudo find /mnt -print |  grep -i vmlin #findit
-
+sudo find /mnt -print |  grep -i initramf #findit
+sudo find /mnt -print |  grep -i efibootm #findit
 dd if=/dev/rdsk/device-name of=/dev/rdsk/device-name bs=blocksize status=progress #cloneit
 fsck /dev/rdsk/device-name
