@@ -57,6 +57,8 @@ sudo mount  /dev/sda3 /mnt         #mountitefi
 for i in /dev/pts /proc /sys /run; do sudo mount -B $i /mnt$i; done #mountitchroot
 sudo mount -t sysfs sysfs /mnt/sys #mountitchroot
 sudo mount -t efivarfs none /mnt/sys/firmware/efi/efivars #mountitchroot
+#refresh mounts #mountitchroot
+systemctl daemon-reload #mountitchroot
 
 /dev/<xxx>     /            <fff>    defaults            1     1
 /dev/<yyy>     swap         swap     pri=1               0     0
