@@ -1,0 +1,14 @@
+Info obtained from this site:
+https://www.cyberciti.biz/faq/how-to-install-networked-hp-printer-and-scanner-on-fedora-linux/
+1. setup hp printer:
+sudo dnf upgrade
+sudo dnf search hplip
+sudo dnf install hplip hplip-gui
+
+2. configure hp printer
+hp-setup
+
+3. control the printer
+hp-toolbox
+
+4. for scanning use Simple Scan app, or other apps available by default
